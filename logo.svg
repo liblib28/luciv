@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110" fill="none">
+  <defs>
+    <linearGradient id="g-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2E1065"/>
+      <stop offset="100%" stop-color="#18004A"/>
+    </linearGradient>
+    <linearGradient id="g-dark2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B0764"/>
+      <stop offset="100%" stop-color="#1E0550"/>
+    </linearGradient>
+    <linearGradient id="g-front" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5B21B6"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="g-bright" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9333EA"/>
+      <stop offset="35%" stop-color="#D946EF"/>
+      <stop offset="100%" stop-color="#F5D0FE"/>
+    </linearGradient>
+    <linearGradient id="g-bright2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#F0ABFC"/>
+    </linearGradient>
+    <linearGradient id="g-foot-top" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#F0ABFC"/>
+    </linearGradient>
+    <linearGradient id="g-foot-front" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#18004A"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- SPIKE TIP — very bright pink-lavender -->
+  <polygon points="50,9 64,19 55,23 43,23 50,9" fill="#F5D0FE"/>
+
+  <!-- SPIKE inner highlight (the folded-in face) -->
+  <polygon points="50,9 43,23 47,19" fill="#DDD6FE"/>
+
+  <!-- DARK LEFT of spike -->
+  <polygon points="35,23 43,23 50,9" fill="url(#g-dark)"/>
+
+  <!-- DARK BACK FACE of vertical bar -->
+  <polygon points="35,23 43,23 39,85 29,88" fill="url(#g-dark2)"/>
+
+  <!-- FRONT CENTER FACE of vertical bar -->
+  <polygon points="43,23 55,23 57,85 39,85" fill="url(#g-front)"/>
+
+  <!-- Inner shadow strip (depth between dark and front) -->
+  <polygon points="43,23 46,23 42,85 39,85" fill="url(#g-dark)" opacity="0.45"/>
+
+  <!-- BRIGHT RIGHT FACE of vertical bar (lavender-pink highlight) -->
+  <polygon points="55,23 64,19 66,85 57,85" fill="url(#g-bright)"/>
+
+  <!-- FOOT — bright top surface (connecting face) -->
+  <polygon points="29,88 39,85 57,85 66,85 79,82 77,90 29,93" fill="url(#g-foot-top)"/>
+
+  <!-- FOOT — front face -->
+  <polygon points="29,93 77,90 77,98 29,98" fill="url(#g-foot-front)"/>
+
+  <!-- FOOT — right end cap -->
+  <polygon points="79,82 85,85 85,98 77,98 77,90" fill="url(#g-dark)"/>
+
+  <!-- FOOT — inner highlight on top surface -->
+  <polygon points="39,85 57,85 66,85 56,87 40,87" fill="#F0ABFC" opacity="0.3"/>
+</svg>

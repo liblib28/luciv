@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Representatives Scorecard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Setup Modal -->
+  <div id="setup-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-luciv-brand">
+          <img src="logo.png" class="modal-logo-img" alt="Luciv">
+          <div class="modal-brand-name">Luciv</div>
+        </div>
+        <p>Enter your API keys to get started. Keys are stored locally in your browser.</p>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label for="propublica-key-input">
+            OpenStates API Key
+            <span class="optional">Optional — adds your state senators &amp; representatives</span>
+          </label>
+          <input type="text" id="propublica-key-input" placeholder="paste your OpenStates key here">
+          <a class="api-link" href="https://openstates.org/accounts/signup/" target="_blank">
+            Free instant signup → openstates.org/accounts/signup
+          </a>
+        </div>
+        <div class="field-group">
+          <label for="fec-key-input">
+            FEC API Key
+            <span class="optional">Optional — shows campaign finance for federal officials</span>
+          </label>
+          <input type="text" id="fec-key-input" placeholder="paste your FEC key here (free at api.data.gov)">
+          <a class="api-link" href="https://api.data.gov/signup/" target="_blank">
+            Free instant signup → api.data.gov/signup
+          </a>
+        </div>
+        <input type="hidden" id="civic-key-input" value="built-in">
+        <button id="save-keys-btn" class="btn-primary" onclick="saveKeys()">Save & Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="hidden">
+
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="header-brand">
+          <img src="logo.png" class="luciv-logo-img" alt="Luciv">
+          <div>
+            <h1>Luciv</h1>
+            <p class="brand-sub">localize the system</p>
+          </div>
+        </div>
+        <button class="btn-settings" onclick="openSettings()" title="Settings">⚙️</button>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-inner">
+          <span class="search-icon">📍</span>
+          <input
+            type="text"
+            id="address-input"
+            placeholder="Enter your address (e.g. 100 Main St, New York, NY 10001)"
+            onkeydown="if(event.key==='Enter') lookupReps()"
+          >
+          <button class="btn-search" onclick="lookupReps()">
+            <span id="search-btn-text">Search</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div id="intro-state" class="state-view">
+        <div class="intro-card">
+          <div class="intro-luciv-brand">
+            <img src="logo.png" class="intro-logo-img" alt="Luciv">
+            <div>
+              <div class="intro-luciv-name">Luciv</div>
+              <div class="intro-luciv-tag">localize the system</div>
+            </div>
+          </div>
+          <h2 class="intro-civic-heading">Your civic engagement<br>starts here.</h2>
+          <p class="intro-civic-sub">Stay informed about local politics and make your voice heard. Enter your address above to see your elected officials at every level of government.</p>
+          <div class="intro-features">
+            <div class="feature-pill">🏛️ Federal, State &amp; Local</div>
+            <div class="feature-pill">🎯 Top Issues</div>
+            <div class="feature-pill">💰 Campaign Finance</div>
+            <div class="feature-pill">📋 Campaign Promises</div>
+            <div class="feature-pill">📊 Political Spectrum</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="loading-state" class="state-view hidden">
+        <div class="spinner"></div>
+        <p id="loading-msg">Looking up your representatives…</p>
+      </div>
+
+      <div id="error-state" class="state-view hidden">
+        <div class="error-icon">⚠️</div>
+        <h3 id="error-title">Something went wrong</h3>
+        <p id="error-msg"></p>
+        <button class="btn-primary" onclick="hideError()">Try Again</button>
+      </div>
+
+      <div id="results-container" class="hidden">
+        <div id="address-display" class="address-banner"></div>
+        <div id="level-tabs" class="level-tabs">
+          <button class="tab active" data-level="all" onclick="filterByLevel('all')">All</button>
+          <button class="tab" data-level="federal" onclick="filterByLevel('federal')">Federal</button>
+          <button class="tab" data-level="state" onclick="filterByLevel('state')">State</button>
+          <button class="tab" data-level="local" onclick="filterByLevel('local')">Local</button>
+        </div>
+        <div id="cards-grid" class="cards-grid"></div>
+      </div>
+    </main>
+
+    <!-- Detail Drawer -->
+    <div id="detail-modal" class="hidden">
+      <div id="detail-overlay"></div>
+      <div id="detail-panel" class="detail-panel">
+        <div class="detail-close-bar">
+          <button onclick="closeDetail()">✕ Close</button>
+        </div>
+        <div id="detail-content"></div>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      Data: Google Civic Information API · ProPublica Congress API · Information may be delayed.
+    </footer>
+  </div>
+
+  <script src="script.js?v=12"></script>
+</body>
+</html>
