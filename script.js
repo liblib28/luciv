@@ -38,6 +38,37 @@ function partyEmoji(party = '') {
   return '⚫';
 }
 
+// ── AUTH (optional sign up / log in) ─────────────────────────────────────────
+
+function switchAuthTab(tab, btn) {
+  document.querySelectorAll('.signup-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('auth-login').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('auth-signup').classList.toggle('hidden', tab !== 'signup');
+}
+
+function handleLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  if (!email || !pass) return;
+  // Placeholder — real auth can be wired up later
+  showAuthSuccess('Welcome back! Account features coming soon.');
+}
+
+function handleSignup() {
+  const name  = document.getElementById('signup-name').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass  = document.getElementById('signup-password').value;
+  if (!name || !email || !pass) return;
+  // Placeholder — real auth can be wired up later
+  showAuthSuccess(`Thanks, ${name}! We'll be in touch at ${email}.`);
+}
+
+function showAuthSuccess(msg) {
+  const card = document.querySelector('.signup-card');
+  card.innerHTML = `<div class="auth-success"><div class="auth-success-icon">✓</div><p>${msg}</p><p class="auth-skip" style="margin-top:12px" onclick="document.getElementById('intro-state').style.display='none'">Start browsing →</p></div>`;
+}
+
 // ── SETUP ────────────────────────────────────────────────────────────────────
 
 function saveKeys() {
