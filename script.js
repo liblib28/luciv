@@ -1,6 +1,6 @@
 // ── CONFIG ───────────────────────────────────────────────────────────────────
 
-const API = 'http://localhost:8080/api/reps';
+const API = '/api/reps';
 
 let state = {
   reps: [],
@@ -54,6 +54,12 @@ function openSettings() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  // Fetch server-side config — if built-in keys exist, use them and skip modal
+  fetch('/api/config').then(r => r.json()).then(cfg => {
+    if (cfg.openstatesKey) { state.openstatesKey = cfg.openstatesKey; localStorage.setItem('openstatesKey', cfg.openstatesKey); }
+    if (cfg.fecKey) { state.fecKey = cfg.fecKey; localStorage.setItem('fecKey', cfg.fecKey); }
+  }).catch(() => {});
+
   document.getElementById('setup-modal').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
 

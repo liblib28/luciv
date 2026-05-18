@@ -12,7 +12,11 @@ SESSION = requests.Session()
 SESSION.headers.update({'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'})
 
 FEC_API = 'https://api.open.fec.gov/v1'
-FEC_KEY = 'DEMO_KEY'  # Override via ?fec_key= param; free key at api.data.gov gives 1000/hr
+import os
+# Built-in keys loaded from environment variables (set in Railway dashboard)
+# These are used as defaults so visitors don't need to enter their own keys.
+OPENSTATES_KEY = os.environ.get('OPENSTATES_KEY', '')
+FEC_KEY = os.environ.get('FEC_KEY', 'DEMO_KEY')
 
 _fec_cache = {}  # in-memory cache: (name, state, office) → (funders, cycle)
 _tu_cache  = {}  # in-memory cache: (name, state) → funders list
@@ -1363,14 +1367,25 @@ def geocode(address):
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# CONFIG ENDPOINT — exposes built-in keys to the frontend
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.route('/api/config')
+def get_config():
+    return jsonify({
+        'openstatesKey': OPENSTATES_KEY or '',
+        'fecKey': FEC_KEY if FEC_KEY != 'DEMO_KEY' else '',
+    })
+
 # MAIN API ROUTE
 # ─────────────────────────────────────────────────────────────────────────────
 
 @app.route('/api/reps')
 def get_reps():
     address = request.args.get('address', '').strip()
-    openstates_key = request.args.get('openstates_key', '').strip()
-    fec_key = request.args.get('fec_key', '').strip() or None
+    # Use client-supplied keys, falling back to server-side built-in keys
+    openstates_key = request.args.get('openstates_key', '').strip() or OPENSTATES_KEY
+    fec_key = request.args.get('fec_key', '').strip() or (FEC_KEY if FEC_KEY != 'DEMO_KEY' else None)
     if not address:
         return jsonify({'error': 'Address is required'}), 400
 
