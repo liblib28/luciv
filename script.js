@@ -8,6 +8,8 @@ let state = {
   currentAddress: '',
   openstatesKey: localStorage.getItem('openstatesKey') || '',
   fecKey: localStorage.getItem('fecKey') || '',
+  serverHasOpenStates: false,  // set by /api/status — keys stay on server
+  serverHasFec: false,
 };
 
 // ── PARTY HELPERS ─────────────────────────────────────────────────────────────
@@ -54,10 +56,10 @@ function openSettings() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  // Fetch server-side config — if built-in keys exist, use them and skip modal
-  fetch('/api/config').then(r => r.json()).then(cfg => {
-    if (cfg.openstatesKey) { state.openstatesKey = cfg.openstatesKey; localStorage.setItem('openstatesKey', cfg.openstatesKey); }
-    if (cfg.fecKey) { state.fecKey = cfg.fecKey; localStorage.setItem('fecKey', cfg.fecKey); }
+  // Ask server if built-in keys are available (server never reveals the actual key values)
+  fetch('/api/status').then(r => r.json()).then(s => {
+    if (s.hasOpenStates) state.serverHasOpenStates = true;
+    if (s.hasFec) state.serverHasFec = true;
   }).catch(() => {});
 
   document.getElementById('setup-modal').classList.add('hidden');
@@ -118,8 +120,9 @@ async function lookupReps() {
 
   try {
     const params = new URLSearchParams({ address });
-    if (state.openstatesKey) params.set('openstates_key', state.openstatesKey);
-    if (state.fecKey) params.set('fec_key', state.fecKey);
+    // Only send user-supplied keys — server uses its own built-in keys automatically
+    if (state.openstatesKey && !state.serverHasOpenStates) params.set('openstates_key', state.openstatesKey);
+    if (state.fecKey && !state.serverHasFec) params.set('fec_key', state.fecKey);
 
     const res = await fetch(`${API}?${params}`);
     const data = await res.json();

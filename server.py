@@ -1367,14 +1367,14 @@ def geocode(address):
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# CONFIG ENDPOINT — exposes built-in keys to the frontend
+# STATUS ENDPOINT — tells frontend whether server has built-in keys (never exposes the keys themselves)
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.route('/api/config')
-def get_config():
+@app.route('/api/status')
+def get_status():
     return jsonify({
-        'openstatesKey': OPENSTATES_KEY or '',
-        'fecKey': FEC_KEY if FEC_KEY != 'DEMO_KEY' else '',
+        'hasOpenStates': bool(OPENSTATES_KEY),
+        'hasFec': bool(FEC_KEY and FEC_KEY != 'DEMO_KEY'),
     })
 
 # MAIN API ROUTE
