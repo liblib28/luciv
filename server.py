@@ -1503,7 +1503,8 @@ def get_reps():
 # ─────────────────────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    port = 8080
-    print(f'\n🏛️  Representatives Scorecard running at http://localhost:{port}')
+    import os
+    port = int(os.environ.get('PORT', 8080))
+    print(f'\n🏛️  Luciv running at http://localhost:{port}')
     print('   Open that URL in your browser.\n')
-    app.run(port=port, debug=False, threaded=True)
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
