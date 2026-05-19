@@ -104,6 +104,12 @@
 
           <!-- RIGHT: optional sign up -->
           <div class="signup-card">
+            <!-- Luciv logo at top, matching Figma -->
+            <div class="signup-logo">
+              <img src="logo.png" class="signup-logo-img" alt="Luciv">
+              <span class="signup-logo-name">Luciv</span>
+            </div>
+
             <div class="signup-tabs">
               <button class="signup-tab active" onclick="switchAuthTab('login', this)">Log In</button>
               <button class="signup-tab" onclick="switchAuthTab('signup', this)">Sign Up</button>
@@ -135,11 +141,11 @@
                 <label>Password</label>
                 <input type="password" placeholder="••••••••" id="signup-password">
               </div>
-              <button class="auth-submit" onclick="handleSignup()">Create Account</button>
+              <button class="auth-submit" onclick="handleSignup()">Sign Up</button>
             </div>
 
-            <p class="auth-skip" onclick="document.getElementById('intro-state').classList.add('hidden'); document.getElementById('intro-state').style.display='none'">
-              Skip — just browse without an account →
+            <p class="auth-skip" onclick="document.getElementById('intro-state').style.display='none'">
+              Continue without an account →
             </p>
           </div>
 

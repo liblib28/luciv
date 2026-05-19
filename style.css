@@ -217,45 +217,69 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
 }
 
 /* ── SIGN UP CARD ── */
+/* ── SIGNUP CARD — matches Figma design ── */
 .signup-card {
   background: var(--surface);
   border-radius: 28px;
-  padding: 36px 32px 32px;
+  padding: 40px 36px 36px;
   box-shadow: 0 20px 60px rgba(109,40,217,0.14), 0 4px 16px rgba(0,0,0,0.06);
   border: 1.5px solid var(--border);
-  display: flex; flex-direction: column; gap: 20px;
+  display: flex; flex-direction: column; gap: 24px;
+  align-items: center;
 }
+
+/* Logo header */
+.signup-logo {
+  display: flex; align-items: center; gap: 12px;
+}
+.signup-logo-img {
+  height: 52px; width: auto;
+  filter: drop-shadow(0 3px 8px rgba(124,58,237,0.35));
+}
+.signup-logo-name {
+  font-size: 30px; font-weight: 900; color: var(--text); letter-spacing: -0.5px;
+}
+
+/* Tab switcher — pill style like Figma */
 .signup-tabs {
-  display: flex; gap: 0;
-  background: var(--bg); border-radius: 12px;
-  padding: 4px; border: 1.5px solid var(--border);
+  display: flex; gap: 0; width: 100%;
+  background: var(--bg); border-radius: 14px;
+  padding: 5px; border: 1.5px solid var(--border);
 }
 .signup-tab {
-  flex: 1; padding: 10px; border: none; border-radius: 9px;
+  flex: 1; padding: 11px; border: none; border-radius: 10px;
   background: transparent; font-size: 15px; font-weight: 600;
   color: var(--text-muted); cursor: pointer; transition: all .2s;
 }
 .signup-tab.active {
   background: var(--surface);
   color: var(--primary);
-  box-shadow: 0 2px 8px rgba(109,40,217,0.12);
+  box-shadow: 0 2px 10px rgba(109,40,217,0.15);
 }
-.auth-form { display: flex; flex-direction: column; gap: 16px; }
-.auth-field { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+
+/* Form fields */
+.auth-form { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.auth-field { display: flex; flex-direction: column; gap: 7px; text-align: left; }
 .auth-field label { font-size: 14px; font-weight: 600; color: var(--text); }
 .auth-field input {
-  padding: 12px 14px; border: 1.5px solid var(--border);
+  padding: 13px 16px; border: 1.5px solid #E2E8F0;
   border-radius: 12px; font-size: 15px; font-family: inherit;
-  background: var(--bg); color: var(--text); outline: none; transition: border .2s;
+  background: white; color: var(--text); outline: none; transition: border .2s;
 }
-.auth-field input:focus { border-color: var(--primary); }
+.auth-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+.auth-field input::placeholder { color: #94A3B8; }
+
+/* Submit button — large pill like Figma */
 .auth-submit {
-  width: 100%; padding: 14px; border: none; border-radius: 14px;
+  width: 100%; padding: 16px; border: none; border-radius: 99px;
   background: var(--primary); color: white;
-  font-size: 16px; font-weight: 700; cursor: pointer;
-  transition: background .2s, transform .1s;
+  font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 0.2px;
+  transition: background .2s, transform .1s, box-shadow .2s;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.35);
+  margin-top: 4px;
 }
-.auth-submit:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.auth-submit:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124,58,237,0.45); }
+
 .auth-link {
   text-align: center; font-size: 13px; color: var(--text-muted);
   cursor: pointer; margin: 0;
@@ -271,10 +295,11 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
   gap: 12px; padding: 24px 0; text-align: center;
 }
 .auth-success-icon {
-  width: 52px; height: 52px; border-radius: 50%;
+  width: 56px; height: 56px; border-radius: 50%;
   background: var(--primary); color: white;
   display: flex; align-items: center; justify-content: center;
-  font-size: 24px; font-weight: 700;
+  font-size: 26px; font-weight: 700;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.35);
 }
 .intro-graphic { font-size: 72px; }
 .state-view h2 { font-size: 26px; font-weight: 800; color: var(--text); }
