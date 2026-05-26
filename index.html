@@ -102,47 +102,17 @@
             </div>
           </div>
 
-          <!-- RIGHT: optional sign up -->
+          <!-- RIGHT: account card -->
           <div class="signup-card">
-            <!-- Luciv logo at top, matching Figma -->
             <div class="signup-logo">
               <img src="logo.png" class="signup-logo-img" alt="Luciv">
               <span class="signup-logo-name">Luciv</span>
             </div>
 
-            <div class="signup-tabs">
-              <button class="signup-tab active" onclick="switchAuthTab('login', this)">Log In</button>
-              <button class="signup-tab" onclick="switchAuthTab('signup', this)">Sign Up</button>
-            </div>
+            <p class="signup-card-desc">Create an account to save your representatives, track votes, and get personalized alerts.</p>
 
-            <div id="auth-login" class="auth-form">
-              <div class="auth-field">
-                <label>Email</label>
-                <input type="email" placeholder="you@example.com" id="login-email">
-              </div>
-              <div class="auth-field">
-                <label>Password</label>
-                <input type="password" placeholder="••••••••" id="login-password">
-              </div>
-              <button class="auth-submit" onclick="handleLogin()">Log In</button>
-              <p class="auth-link">Forgot password?</p>
-            </div>
-
-            <div id="auth-signup" class="auth-form hidden">
-              <div class="auth-field">
-                <label>Name</label>
-                <input type="text" placeholder="Your name" id="signup-name">
-              </div>
-              <div class="auth-field">
-                <label>Email</label>
-                <input type="email" placeholder="you@example.com" id="signup-email">
-              </div>
-              <div class="auth-field">
-                <label>Password</label>
-                <input type="password" placeholder="••••••••" id="signup-password">
-              </div>
-              <button class="auth-submit" onclick="handleSignup()">Sign Up</button>
-            </div>
+            <a href="/login" class="auth-submit-link">Log In</a>
+            <a href="/login#signup" class="auth-submit-link auth-submit-link--outline">Sign Up</a>
 
             <p class="auth-skip" onclick="document.getElementById('intro-state').style.display='none'">
               Continue without an account →

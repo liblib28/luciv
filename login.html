@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luciv — Log In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px 40px;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+
+    /* ── LOGO ── */
+    .login-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .login-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .login-logo-img {
+      height: 72px;
+      width: auto;
+      filter: drop-shadow(0 4px 12px rgba(124,58,237,0.3));
+    }
+    .login-logo-name {
+      font-size: 48px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+    .login-logo-tag {
+      font-size: 14px;
+      color: #94a3b8;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    /* ── CARD ── */
+    .login-card {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 32px 28px;
+      border: 1.5px solid #ede9fe;
+      box-shadow:
+        0 8px 40px rgba(109,40,217,0.10),
+        0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* ── TABS ── */
+    .auth-tabs {
+      display: flex;
+      width: 100%;
+      background: #f3f0fb;
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 28px;
+      gap: 2px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 12px 0;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 600;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all .18s;
+      font-family: 'Inter', sans-serif;
+    }
+    .auth-tab.active {
+      background: #ffffff;
+      color: #7C3AED;
+      box-shadow: 0 2px 10px rgba(109,40,217,0.13);
+    }
+
+    /* ── FORM ── */
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .auth-form.hidden { display: none; }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .form-field label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .form-field input {
+      width: 100%;
+      border: 1.5px solid #e2d9f3;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: #0f172a;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .form-field input::placeholder { color: #b0a8c8; }
+    .form-field input:focus {
+      border-color: #7C3AED;
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+    }
+
+    /* ── BUTTON ── */
+    .auth-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 99px;
+      background: #7C3AED;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.38);
+      transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+      margin-top: 4px;
+    }
+    .auth-btn:hover {
+      opacity: 0.93;
+      box-shadow: 0 6px 28px rgba(124,58,237,0.45);
+    }
+    .auth-btn:active { transform: scale(0.98); }
+
+    /* ── FORGOT / LINKS ── */
+    .forgot-link {
+      text-align: center;
+      font-size: 14px;
+      color: #94a3b8;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      padding: 0;
+      margin-top: 2px;
+      transition: color 0.15s;
+    }
+    .forgot-link:hover { color: #7C3AED; }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      font-size: 14px;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #7C3AED; }
+
+    /* ── TAGLINE ── */
+    .login-tagline {
+      text-align: center;
+      font-size: 13px;
+      color: #b0bec5;
+      line-height: 1.65;
+      max-width: 320px;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0 8px;
+      text-align: center;
+    }
+    .success-icon {
+      width: 60px; height: 60px;
+      background: #7C3AED;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; color: white;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+    }
+    .success-msg {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.4;
+    }
+    .success-cta {
+      font-size: 14px;
+      color: #7C3AED;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 4px;
+    }
+    .success-cta:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .login-logo-name { font-size: 38px; }
+      .login-logo-img  { height: 56px; }
+      .login-card { padding: 28px 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrapper">
+
+    <!-- Logo -->
+    <div class="login-logo">
+      <div class="login-logo-row">
+        <img src="logo.png" alt="Luciv" class="login-logo-img">
+        <span class="login-logo-name">LUCIV</span>
+      </div>
+      <span class="login-logo-tag">localize the system</span>
+    </div>
+
+    <!-- Card -->
+    <div class="login-card" id="login-card">
+
+      <!-- Tab switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Log In</button>
+        <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Log In form -->
+      <div id="form-login" class="auth-form">
+        <div class="form-field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"
+                 onkeydown="if(event.key==='Enter') handleLogin()">
+        </div>
+        <button class="auth-btn" onclick="handleLogin()">Log In</button>
+        <button class="forgot-link">Forgot password?</button>
+      </div>
+
+      <!-- Sign Up form -->
+      <div id="form-signup" class="auth-form hidden">
+        <div class="form-field">
+          <label for="signup-name">Name</label>
+          <input type="text" id="signup-name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" placeholder="••••••••" autocomplete="new-password"
+                 onkeydown="if(event.key==='Enter') handleSignup()">
+        </div>
+        <button class="auth-btn" onclick="handleSignup()">Sign Up</button>
+      </div>
+
+    </div>
+
+    <a href="/" class="back-link">← Back to Luciv</a>
+
+    <p class="login-tagline">Your civic engagement starts here. Stay informed about local politics and make your voice heard.</p>
+
+  </div>
+
+  <script>
+    // Auto-switch to Sign Up if URL hash says so
+    if (location.hash === '#signup') switchTab('signup');
+
+    function switchTab(tab) {
+      document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+      document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+      document.getElementById('form-login').classList.toggle('hidden', tab !== 'login');
+      document.getElementById('form-signup').classList.toggle('hidden', tab !== 'signup');
+    }
+
+    function handleLogin() {
+      const email = document.getElementById('login-email').value.trim();
+      const pass  = document.getElementById('login-password').value;
+      if (!email || !pass) return;
+      showSuccess('Welcome back! Account features coming soon.');
+    }
+
+    function handleSignup() {
+      const name  = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const pass  = document.getElementById('signup-password').value;
+      if (!name || !email || !pass) return;
+      showSuccess(`Thanks, ${name}! We’ll be in touch.`);
+    }
+
+    function showSuccess(msg) {
+      document.getElementById('login-card').innerHTML = `
+        <div class="success-state">
+          <div class="success-icon">✓</div>
+          <p class="success-msg">${msg}</p>
+          <a href="/" class="success-cta">Start browsing →</a>
+        </div>`;
+    }
+  </script>
+
+</body>
+</html>

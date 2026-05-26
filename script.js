@@ -100,46 +100,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('detail-overlay').addEventListener('click', closeDetail);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 
-  launchConfetti();
 });
-
-// ── CONFETTI ─────────────────────────────────────────────────────────────────
-
-function launchConfetti() {
-  const COLORS = ['#DC2626', '#FFFFFF', '#1E3A8A', '#EF4444', '#93C5FD'];
-  const COUNT = 120;
-  const container = document.createElement('div');
-  container.id = 'confetti-container';
-  document.body.appendChild(container);
-
-  for (let i = 0; i < COUNT; i++) {
-    const el = document.createElement('div');
-    el.className = 'confetti-piece';
-    el.style.cssText = [
-      `left:${Math.random() * 100}vw`,
-      `background:${COLORS[Math.floor(Math.random() * COLORS.length)]}`,
-      `width:${6 + Math.random() * 6}px`,
-      `height:${8 + Math.random() * 8}px`,
-      `animation-duration:${2.5 + Math.random() * 2}s`,
-      `animation-delay:${Math.random() * 1.2}s`,
-      `transform:rotate(${Math.random() * 360}deg)`,
-      `border-radius:${Math.random() > 0.5 ? '50%' : '2px'}`,
-    ].join(';');
-    container.appendChild(el);
-  }
-
-  const toast = document.createElement('div');
-  toast.id = 'confetti-toast';
-  toast.textContent = '🎉 Yay! You\'re taking the first step to being civically engaged!';
-  document.body.appendChild(toast);
-
-  setTimeout(() => toast.classList.add('confetti-toast-visible'), 400);
-  setTimeout(() => toast.classList.add('confetti-toast-hiding'), 3500);
-  setTimeout(() => {
-    toast.remove();
-    container.remove();
-  }, 5000);
-}
 
 // ── MAIN LOOKUP ───────────────────────────────────────────────────────────────
 

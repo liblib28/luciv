@@ -79,6 +79,10 @@ def add_cors(r):
 def index():
     return send_from_directory('.', 'index.html')
 
+@app.route('/login')
+def login():
+    return send_from_directory('.', 'login.html')
+
 @app.route('/<path:filename>')
 def static_files(filename):
     return send_from_directory('.', filename)

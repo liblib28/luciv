@@ -240,67 +240,35 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
   font-size: 30px; font-weight: 900; color: var(--text); letter-spacing: -0.5px;
 }
 
-/* Tab switcher — pill style like Figma */
-.signup-tabs {
-  display: flex; gap: 0; width: 100%;
-  background: var(--bg); border-radius: 14px;
-  padding: 5px; border: 1.5px solid var(--border);
-}
-.signup-tab {
-  flex: 1; padding: 11px; border: none; border-radius: 10px;
-  background: transparent; font-size: 15px; font-weight: 600;
-  color: var(--text-muted); cursor: pointer; transition: all .2s;
-}
-.signup-tab.active {
-  background: var(--surface);
-  color: var(--primary);
-  box-shadow: 0 2px 10px rgba(109,40,217,0.15);
+/* Signup card description */
+.signup-card-desc {
+  font-size: 14px; color: var(--text-muted); text-align: center;
+  line-height: 1.55; max-width: 280px;
 }
 
-/* Form fields */
-.auth-form { display: flex; flex-direction: column; gap: 16px; width: 100%; }
-.auth-field { display: flex; flex-direction: column; gap: 7px; text-align: left; }
-.auth-field label { font-size: 14px; font-weight: 600; color: var(--text); }
-.auth-field input {
-  padding: 13px 16px; border: 1.5px solid #E2E8F0;
-  border-radius: 12px; font-size: 15px; font-family: inherit;
-  background: white; color: var(--text); outline: none; transition: border .2s;
-}
-.auth-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
-.auth-field input::placeholder { color: #94A3B8; }
-
-/* Submit button — large pill like Figma */
-.auth-submit {
-  width: 100%; padding: 16px; border: none; border-radius: 99px;
+/* CTA link buttons */
+.auth-submit-link {
+  display: block; width: 100%;
+  padding: 15px; border-radius: 99px;
   background: var(--primary); color: white;
-  font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 0.2px;
-  transition: background .2s, transform .1s, box-shadow .2s;
+  font-size: 15px; font-weight: 700; text-align: center;
+  text-decoration: none; letter-spacing: 0.2px;
   box-shadow: 0 4px 16px rgba(124,58,237,0.35);
-  margin-top: 4px;
+  transition: background .2s, transform .1s, box-shadow .2s;
 }
-.auth-submit:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124,58,237,0.45); }
+.auth-submit-link:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124,58,237,0.45); }
+.auth-submit-link--outline {
+  background: transparent; color: var(--primary);
+  border: 1.5px solid var(--primary);
+  box-shadow: none;
+}
+.auth-submit-link--outline:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: none; }
 
-.auth-link {
-  text-align: center; font-size: 13px; color: var(--text-muted);
-  cursor: pointer; margin: 0;
-}
-.auth-link:hover { color: var(--primary); }
 .auth-skip {
   text-align: center; font-size: 13px; color: var(--text-muted);
   cursor: pointer; margin: 0; transition: color .2s;
 }
 .auth-skip:hover { color: var(--primary); }
-.auth-success {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 12px; padding: 24px 0; text-align: center;
-}
-.auth-success-icon {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--primary); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; font-weight: 700;
-  box-shadow: 0 4px 16px rgba(124,58,237,0.35);
-}
 .intro-graphic { font-size: 72px; }
 .state-view h2 { font-size: 26px; font-weight: 800; color: var(--text); }
 .state-view p { font-size: 16px; color: var(--text-muted); max-width: 420px; }
@@ -913,49 +881,3 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
   text-align: center;
 }
 
-/* ── CONFETTI ───────────────────────────────────────────────────────────────── */
-
-@keyframes confetti-fall {
-  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-  80%  { opacity: 1; }
-  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-}
-
-#confetti-container {
-  position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden;
-}
-
-.confetti-piece {
-  position: absolute;
-  top: -12px;
-  animation: confetti-fall linear forwards;
-}
-
-#confetti-toast {
-  position: fixed;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-80px);
-  background: #1E3A8A;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 99px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  z-index: 10000;
-  white-space: nowrap;
-  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
-  opacity: 0;
-}
-
-#confetti-toast.confetti-toast-visible {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
-
-#confetti-toast.confetti-toast-hiding {
-  transform: translateX(-50%) translateY(-80px);
-  opacity: 0;
-}
