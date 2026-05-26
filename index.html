@@ -59,7 +59,8 @@
             <p class="brand-sub">localize the system</p>
           </div>
         </div>
-        <button class="btn-settings" onclick="openSettings()" title="Settings">⚙️</button>
+        <!-- Settings hidden from public — developer shortcut: Ctrl+Shift+K -->
+        <button class="btn-settings dev-only" id="dev-settings-btn" onclick="openSettings()" title="Developer Settings" style="display:none">⚙️</button>
       </div>
 
       <div class="search-bar">
@@ -162,6 +163,6 @@
     </footer>
   </div>
 
-  <script src="script.js?v=12"></script>
+  <script src="script.js?v=13"></script>
 </body>
 </html>

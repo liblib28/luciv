@@ -100,6 +100,21 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('detail-overlay').addEventListener('click', closeDetail);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 
+  // ── DEVELOPER MODE ────────────────────────────────────────────────────────
+  // API key settings are hidden from the public.
+  // Developers can access them with Ctrl+Shift+K (or Cmd+Shift+K on Mac).
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'K') {
+      e.preventDefault();
+      const btn = document.getElementById('dev-settings-btn');
+      btn.style.display = btn.style.display === 'none' ? '' : 'none';
+      if (btn.style.display !== 'none') {
+        // Brief flash to confirm dev mode is active
+        btn.style.outline = '2px solid #7C3AED';
+        setTimeout(() => btn.style.outline = '', 800);
+      }
+    }
+  });
 });
 
 // ── MAIN LOOKUP ───────────────────────────────────────────────────────────────
